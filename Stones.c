@@ -187,8 +187,9 @@ void Del_Element(Data_Base* a, void* needdelete, int typedelete)
    case(0):
       for (int i = 0; i < a->size; i++)
       {
-         number_element = Find_Element_number(a, (int)needdelete);
-         if (number_element == NULL)
+         if (Find_Element_number(a, (int)needdelete) != NULL)
+            number_element = Find_Element_number(a, (int)needdelete);
+         else
             return;
          Del_heap(a->Heap[number_element]);
          a->size--;
@@ -198,7 +199,10 @@ void Del_Element(Data_Base* a, void* needdelete, int typedelete)
    case(1):
       for (int i = 0; i < a->size; i++)
       {
-         number_element = Find_Element(a, (char*)needdelete);
+         if (Find_Element_color(a, (char*)needdelete) != NULL)
+            number_element = Find_Element_color(a, (char*)needdelete);
+         else
+            return;
          Del_heap(a->Heap[number_element]);
          a->size--;
          Move_Elements(a, number_element);
